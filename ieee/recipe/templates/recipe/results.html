@@ -1,0 +1,13 @@
+{% extends 'recipe/layout.html' %}
+{% block body %}
+    <ul>
+        {% for meal in meals %}
+            <a href="{% url 'recipe' meal.idMeal %}">
+                <div>
+                    <img width="200" height="200" src="{{meal.strMealThumb}}/preview">
+                    <label>{{meal.strMeal}}</label>
+                </div>
+            </a>
+        {% endfor %}
+    </ul>
+{% endblock %}

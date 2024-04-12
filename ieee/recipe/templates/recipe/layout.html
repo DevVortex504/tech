@@ -18,7 +18,7 @@
         </div>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                <a class="nav-link" href="{% url 'index' %}">Category</a>
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
@@ -32,6 +32,13 @@
                     <a class="nav-link" href="{% url 'register' %}">Register</a>
                 </li>
             {% endif %}
+            <li class="nav-item">
+                <form method="GET" action="{% url 'search' %}">
+                    {% csrf_token %}
+                    <input class="search" type="text" name="q" placeholder="Search">
+                    <input type="submit">
+                </form>
+            </li>
         </ul>
         <hr>
         {% if messages %}

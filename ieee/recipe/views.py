@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
@@ -9,6 +8,10 @@ from django.contrib import messages
 from .models import User
 from django.db import IntegrityError
 import requests
+import json
+
+#API KEY
+API_KEY = r"2nnbadeG+8QiCVOaQXVhZw==rlBiBudZ8JUPkOB9"
 
 # Create your views here.
 def index(request):
@@ -64,3 +67,52 @@ def register(request):
     else:
         return render(request, "recipe/register.html")
     
+def search(request, query=None):
+    ...
+def recipe(request, id=None):
+    print(id)
+    if not id:
+        return HttpResponseRedirect(reverse("index"))
+    base_url="https://www.themealdb.com/api/json/v1/1/lookup.php?i={}".format(id)
+    response = requests.get(base_url)
+    o = response.json()
+    meal = o["meals"][0]
+    ingredients = []
+    for i in range(1,21):
+        if meal[f"strIngredient{i}"] != "" or meal[f"strIngredient{i}"] != "null":
+            name = meal[f"strIngredient{i}"]
+            quantity = meal[f"strMeasure{i}"]
+            ingredient = [name,quantity]
+            ingredients.append(ingredient)
+        else:
+            break
+    print(ingredients)
+    return render(request, "recipe/recipe.html",{
+        "meal": meal,
+        "ingredients":ingredients,
+    })
+
+def recipe_data(request):
+    if query := request.GET.get("q"):
+        base_url = "https://www.themealdb.com/api/json/v1/1/search.php?s={}".format(query)
+        response = requests.get(base_url)
+        #print(json.dumps(response.json(), indent=3))
+        o = response.json()
+        if meals:=o["meals"]:
+            for meal in meals:
+                print(meal["strMeal"], meal["strMealThumb"])
+            #strMealThumb = image link
+            #strCategory, strInstruction, idMeal
+        else:
+            api_url = "https://api.api-ninjas.com/v1/recipe?query={}".format(query)
+            response = requests.get(api_url, headers={'X-Api-Key': API_KEY})
+            if response.status_code == requests.codes.ok:
+                print(json.dumps(response.json(), indent=3))
+                for meal in response.json():
+                    print(meal["title"])
+            else:
+                return HttpResponse(f"Error: {response.status_code} {response.text}")  
+    print(meals)
+    return render(request, "recipe/results.html",{
+        "meals": meals,
+    })
