@@ -1,4 +1,32 @@
 {% extends "recipe/layout.html" %}
 {% block body %}
-    <h2>Checking</h2>
+    <section class="hero">
+        <div class="hero-container">
+            <h3>What to cook today</h3>
+            <hr>
+            <div class="hero-image">
+                <img src="https://www.themealdb.com/images/media/meals/1529444113.jpg">
+                <div class="description">
+                    <h1>General Tso's Chicken</h1>
+                    <p><span>Category:</span> Chicken</p>
+                    <p><span>Origin:</span> Chinese</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categort Section -->
+
+    <section class="category">
+        <h2>Category</h2>
+        <div class="index-container">
+            {% for category in categories %}
+                <div class="items">
+                    <h3>{{category.strCategory}}</h3>
+                    <img src="{{category.strCategoryThumb}}">
+                    <p>small description</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

@@ -15,7 +15,21 @@ API_KEY = r"2nnbadeG+8QiCVOaQXVhZw==rlBiBudZ8JUPkOB9"
 
 # Create your views here.
 def index(request):
-    return render(request, "recipe/index.html")
+    base_url = "https://www.themealdb.com/api/json/v1/1/categories.php"
+    random_url = "https://www.themealdb.com/api/json/v1/1/random.php"
+    response_random = requests.get(random_url)
+    j=response_random.json()
+    random = j["meals"][0]
+    print(random)
+    response = requests.get(base_url)
+    #print(json.dumps(response.json(), indent=3))
+    o=response.json()
+    category = o["categories"]
+    print(category)
+    return render(request, "recipe/index.html",{
+        "categories" : category,
+        "random": random,
+    })
 
 def login_view(request):
     if request.method == "POST":
@@ -69,6 +83,13 @@ def register(request):
     
 def search(request, query=None):
     ...
+
+def category(request):
+    url = "https://www.themealdb.com/api/json/v1/1/categories.php"
+    response = requests.get(url)
+    o = response.json()
+    
+
 def recipe(request, id=None):
     print(id)
     if not id:
