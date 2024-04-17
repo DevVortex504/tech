@@ -6,9 +6,10 @@
         <title>{% block title %}Recipe Ez{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="{% static 'recipe/styles.css' %}" rel="stylesheet">
+        <script src="{% scripts 'recipe/layout.js' %}"></script>
     </head>
     <body>
-        <h1>Recipe Ez</h1>
+        <!--
         <div>
             {% if request.user.is_authenticated %}
                 Signed in as <strong>{{ request.user.username }}</strong>.
@@ -16,31 +17,36 @@
                 Not signed in.
             {% endif %}
         </div>
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Category</a>
-            </li>
-            {% if user.is_authenticated %}
+        -->
+        <nav>
+            <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    <a class="nav-link" href="{% url 'index' %}">Logo</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    <a class="nav-link" href="{% url 'index' %}">Category</a>
                 </li>
-            {% endif %}
-            <li class="nav-item">
-                <form method="GET" action="{% url 'search' %}">
-                    {% csrf_token %}
-                    <input class="search" type="text" name="q" placeholder="Search">
-                    <input type="submit">
-                </form>
-            </li>
-        </ul>
-        <hr>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+                <li class="nav-search">
+                    <form method="GET" action="{% url 'search' %}">
+                        {% csrf_token %}
+                        <input class="search" type="text" name="q" placeholder="Search">
+                        <input type="submit">
+                    </form>
+                </li>
+            </ul>
+        </nav>
         {% if messages %}
 
             {% for message in messages %}
