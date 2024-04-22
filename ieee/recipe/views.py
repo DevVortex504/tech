@@ -5,7 +5,7 @@ from django.urls import reverse
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import User
+from .models import User, Favourite
 from django.db import IntegrityError
 import requests
 import json
@@ -111,6 +111,12 @@ def category(request):
     
 
 def recipe(request, id=None):
+    favourite = None
+    if request.user.is_authenticated:
+        try:
+            favourite = Favourite.objects.get(user = request.user, meal_id = int(id))
+        except:
+            favourite = None
     print(id)
     if not id:
         return HttpResponseRedirect(reverse("index"))
@@ -131,6 +137,7 @@ def recipe(request, id=None):
     return render(request, "recipe/recipe.html",{
         "meal": meal,
         "ingredients":ingredients,
+        "favourite":favourite,
     })
 
 def recipe_data(request):
@@ -158,3 +165,40 @@ def recipe_data(request):
         "meals": meals,
         "query": query,
     })
+
+@login_required
+def favourite(request):
+    meals = []
+    base_url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="
+    id = []
+    favourites = Favourite.objects.filter(user = request.user).all()
+    for favourite in favourites:
+        id = int(favourite.meal_id)
+        response = requests.get(base_url+str(id))
+        o = response.json()
+        meal = o["meals"][0]
+        meals.append(meal)
+    print(meals)
+    return render(request, "recipe/favourites.html",{
+        "favourites": favourite,
+        "meals": meals,
+    })
+
+@login_required
+def favourite_add(request, meal_id):
+    meal_id = meal_id
+    user = request.user
+    if Favourite.objects.filter(user=user, meal_id=meal_id):
+        messages.warning(request, "Meal already Favourited.")
+    else:
+        favourite = Favourite(user=user, meal_id=meal_id)
+        favourite.save()
+        messages.success(request,"Added to Favourites.")
+    return redirect("recipe", id = meal_id)
+
+@login_required
+def favourite_remove(request, meal_id):
+    favourite = Favourite.objects.get(user=request.user, meal_id=int(meal_id))
+    favourite.delete()
+    messages.success(request,"Removed from Favourites")
+    return redirect("recipe", id = meal_id)

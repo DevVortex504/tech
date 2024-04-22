@@ -16,5 +16,10 @@
             </table>
             <h5>Instruction:</h5>
             <p>{{meal.strInstructions}}</p>
+            {% if favourite %}
+                <button><a href="{% url 'favourite_remove' meal.idMeal %}">Remove from Favourites</a></button>
+            {% else %}
+                <button><a href="{% url 'favourite_add' meal.idMeal %}">Add to Favourites</a></button>
+            {% endif %}
     </div>
 {% endblock %}
