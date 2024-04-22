@@ -1,13 +1,20 @@
 {% extends 'recipe/layout.html' %}
 {% block body %}
-    <ul>
+    <div class="search-results">
+        {% if not meals %}
+        <h2 class="no-results">No Results Found</h2>
+        {% else %}
+        <h1>Results:</h1>
+        {% endif %}
         {% for meal in meals %}
-            <a href="{% url 'recipe' meal.idMeal %}">
-                <div>
-                    <img width="200" height="200" src="{{meal.strMealThumb}}/preview">
-                    <label>{{meal.strMeal}}</label>
-                </div>
-            </a>
+            <div class="result-item">
+                <a href="{% url 'recipe' meal.idMeal %}">
+                    <div>
+                        <img class="meal-image" src="{{meal.strMealThumb}}">
+                        <label class="meal-name">{{meal.strMeal}}</label>
+                    </div>
+                </a>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

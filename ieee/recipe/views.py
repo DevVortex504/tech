@@ -10,6 +10,14 @@ from django.db import IntegrityError
 import requests
 import json
 
+'''
+class SearchForm(forms.Form):
+    q = forms.CharField(min_length=0, 
+                        max_length=100, 
+                        widget=forms.TextInput(attrs={'placeholder': 'Search','class':'search'}),
+                        )
+'''
+
 #API KEY
 API_KEY = r"2nnbadeG+8QiCVOaQXVhZw==rlBiBudZ8JUPkOB9"
 
@@ -45,7 +53,10 @@ def login_view(request):
             return HttpResponseRedirect(reverse("index"))
         else:
             messages.warning(request, "Invalid username and/or password.")
-            return render(request, "recipe/login.html")
+            return render(request, "recipe/login.html",{
+                "username":username,
+                "password":password,
+            })
     else:
         return render(request, "recipe/login.html")
 
@@ -72,14 +83,23 @@ def register(request):
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
-        except IntegrityError:
-            
+        except IntegrityError: 
             messages.warning(request, "Username already taken.")
-            return render(request, "recipe/register.html")
+            return render(request, "recipe/register.html",{
+                "username":username,
+                "email":email,
+                "password":password,
+                "confirmation":confirmation,
+            })
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
     else:
-        return render(request, "recipe/register.html")
+        return render(request, "recipe/register.html",{
+                "username":username,
+                "email":email,
+                "password":password,
+                "confirmation":confirmation,
+            })
     
 def search(request, query=None):
     ...
@@ -136,4 +156,5 @@ def recipe_data(request):
     print(meals)
     return render(request, "recipe/results.html",{
         "meals": meals,
+        "query": query,
     })

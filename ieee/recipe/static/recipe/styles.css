@@ -1,6 +1,10 @@
 /* body */
 body{
     background-color: aliceblue;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -8,7 +12,7 @@ body{
 
 nav{
     font-size: 1.2em;
-    height: 3.7em;
+    height: 4em;
     background-color: rgb(0, 0, 0);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.19);
 }
@@ -48,18 +52,57 @@ nav a:hover{
 
 nav li:first-child{
     margin-right: auto;
+    margin-left: 10px;
+    justify-content: center;
+}
+
+.logo-first{
+    font-family: "Satisfy", cursive;
+    font-size: 1.5em;
+}
+
+.logo-second{
+    font-family: "Satisfy", cursive;
+    font-size: 1.5em;
+    color: greenyellow;
+}
+
+nav li form input{
+    border-radius: 1.2em;
+    background-color: black;
+    background-image: linear-gradient(to right, rgba(255, 113, 113, 0.529), rgba(255, 255, 108, 0.665));
+    color: white;
+    padding: 5px 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+nav li svg{
+    fill: white;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.search{
+    color: black;
+    background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255));
 }
 
 @media(max-width:800px){
     nav{
-        background-color: aliceblue;
+        background-color: rgb(108, 108, 255);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        z-index: 10;
     }
     nav ul{
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        background-color: aliceblue;
+        background-color: rgb(108, 108, 255);
     }
 }
 
@@ -89,6 +132,7 @@ nav li:first-child{
     margin: 10px;
     margin-top: 1px;
     padding-left: 1.7em;
+    padding-right: 0.5em;
     max-width: 45%;
     position: relative;
 
@@ -112,9 +156,25 @@ nav li:first-child{
     font-weight: 500;
 }
 
+@media(max-width: 950px){
+
+    .hero-image{
+        max-width: 100%;
+        justify-content: center;
+    }
+    .hero-image > img{
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .description{
+        padding-left: 0.5em;
+        margin-left: 0;
+    }
+}
+
 /* category section */
 
-.categoy{
+.category{
     margin: 10px;
     padding: 10px;
 }
@@ -133,6 +193,7 @@ nav li:first-child{
     background-color: white;
     padding: 5px;
     text-align: center;
+    border-radius: 0.4em;
 
 }
 .items>img{
@@ -142,5 +203,67 @@ nav li:first-child{
 
 .items:hover{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: rgba(255, 255, 255, 0.651);
+}
 
+/* Results Section */
+
+.search-results{
+    margin: 10px 50px;
+    padding: 10px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.result-item{
+    width: 100%;
+    margin: 10px 10px;
+    padding: 20px 20px;
+    border-radius: 0.4em;
+}
+
+.result-item:hover{
+    background-color: rgba(0, 0, 0, 0.047);
+}
+
+.meal-image{
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 0.4em;
+}
+
+.meal-name{
+    padding: 10px 10px;
+    font-size: 1.4em;
+    color: rgb(48, 37, 37);
+    font-weight: 500;
+}
+
+@media(max-width:600px){
+    .search-results{
+        margin: 10px 10px;
+    }
+    .meal-image{
+        max-width: 100%;
+        max-height: 10%;
+        height: 10%;
+        width: 100%;
+        justify-self: center;
+    }
+    .meal-name{
+        display: block;
+        text-align: center;
+    }
+    .meal-name:hover{
+        border: 0;
+    }
+}
+
+
+/* register and login */
+
+.register, .login{
+    margin: 10px 10px;
+    padding: 10px 10px;
 }
