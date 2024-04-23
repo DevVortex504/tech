@@ -109,10 +109,22 @@ def register(request):
 def search(request, query=None):
     ...
 
-def category(request):
-    url = "https://www.themealdb.com/api/json/v1/1/categories.php"
-    response = requests.get(url)
-    o = response.json()
+def category(request, category=None):
+    if category:
+        url = "https://www.themealdb.com/api/json/v1/1/filter.php?c="+str(category)
+        response = requests.get(url)
+        o = response.json()
+        meal = o["meals"]
+        try:
+            n = len(meals)
+        except:
+            n = 0
+        return render(request,"recipe/results.html",{
+            "meals":meal,
+            "n":n,
+        })
+    else:
+        return HttpResponseRedirect(reverse("index"))
     
 
 def recipe(request, id=None):
@@ -166,9 +178,14 @@ def recipe_data(request):
             else:
                 return HttpResponse(f"Error: {response.status_code} {response.text}")  
     print(meals)
+    try:
+        n = len(meals)
+    except:
+        n = 0
     return render(request, "recipe/results.html",{
         "meals": meals,
         "query": query,
+        "n":n,
     })
 
 @login_required
@@ -183,10 +200,15 @@ def favourite(request):
         o = response.json()
         meal = o["meals"][0]
         meals.append(meal)
+    try:
+        n = len(meals)
+    except:
+        n = 0
     print(meals)
     return render(request, "recipe/favourites.html",{
         "favourites": favourite,
         "meals": meals,
+        "n":n
     })
 
 @login_required
@@ -207,3 +229,4 @@ def favourite_remove(request, meal_id):
     favourite.delete()
     messages.success(request,"Removed from Favourites")
     return redirect("recipe", id = meal_id)
+

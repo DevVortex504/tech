@@ -21,11 +21,12 @@
         <h2>Category</h2>
         <div class="index-container">
             {% for category in categories %}
-                <div class="items">
-                    <h3>{{category.strCategory}}</h3>
-                    <img src="{{category.strCategoryThumb}}">
-                    <p>small description</p>
-                </div>
+                <a href="{% url 'category' category.strCategory %}">
+                    <div class="items">
+                        <img src="{{category.strCategoryThumb}}">
+                        <h5>{{category.strCategory}}</h5>
+                    </div>
+                </a>  
             {% endfor %}
         </div>
     </section>

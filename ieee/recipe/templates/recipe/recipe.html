@@ -20,10 +20,12 @@
         </div>
         <h4 style="padding-top: 15px; padding-bottom: 10px;">Instruction:</h4>
         <p>{{meal.strInstructions}}</p>
-        {% if favourite %}
-            <button><a href="{% url 'favourite_remove' meal.idMeal %}">Remove from Favourites</a></button>
-        {% else %}
-            <button><a href="{% url 'favourite_add' meal.idMeal %}">Add to Favourites</a></button>
+        {% if request.user.is_authenticated %}
+            {% if favourite %}
+                <button><a href="{% url 'favourite_remove' meal.idMeal %}">Remove from Favourites</a></button>
+            {% else %}
+                <button><a href="{% url 'favourite_add' meal.idMeal %}">Add to Favourites</a></button>
+            {% endif %}
         {% endif %}
             
     </div>

@@ -10,7 +10,8 @@ urlpatterns = [
     #API Routes
     path("recipe/<int:id>", views.recipe, name="recipe"),
     path("api/query/", views.recipe_data, name="search"),
-    path("recipe/<int:meal_id>/favourite", views.favourite_add, name="favourite_add"),
-    path("recipe/<int:meal_id>/favourite/remove", views.favourite_remove, name="favourite_remove"),
-    path("favourites", views.favourite, name="favourites")
+    path("category/<str:category>", views.category, name="category"),
+    path("recipe/<int:meal_id>/favourite/", views.favourite_add, name="favourite_add"),
+    path("recipe/<int:meal_id>/favourite/remove/", views.favourite_remove, name="favourite_remove"),
+    path("favourites/", views.favourite, name="favourites")
 ]

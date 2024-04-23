@@ -1,6 +1,5 @@
 /* body */
 body{
-    background-color: aliceblue;
     width: 100%;
     height: 100vh;
     margin: 0;
@@ -11,6 +10,7 @@ body{
 /* nav */
 
 nav{
+    padding: 0px 30px;
     font-size: 1.2em;
     height: 4em;
     background-color: rgb(0, 0, 0);
@@ -110,7 +110,7 @@ nav li svg{
 
 .hero{
     margin: 10px;
-    padding: 10px;
+    padding: 10px 30px;
 }
 
 .hero-container{
@@ -125,7 +125,7 @@ nav li svg{
 }
 .hero-image > img{
     max-width: 52%;
-    border-radius: 0.4em;
+    border-radius: 0.6em;
 }
 
 .description{
@@ -175,61 +175,82 @@ nav li svg{
 /* category section */
 
 .category{
-    margin: 10px;
-    padding: 10px;
+    padding: 30px 50px;
+    background-color: rgba(232, 232, 232, 0.431);
 }
 
 .index-container{
+    padding: 20px 30px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    overflow-x: scroll;
+    /*flex-wrap: wrap;*/
+    justify-content: space-evenly;
 
+}
+.index-container>a{
+    text-decoration: none;
+    color: black;
 }
 .items{
-    width: 20rem;
-    height: 20rem;
-    margin: 5px;
+    max-width: 300px;
+    height: 200px;
+    margin: 10px 10px;
     margin-bottom: 30px;
-    background-color: white;
-    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.612);
+    padding: 10px 10px;
     text-align: center;
-    border-radius: 0.4em;
-
+    border-radius: 1em;
 }
 .items>img{
-    max-width: 100%;
-
+    width: 200px;
+    border-radius: 200px;
+    padding-bottom: 18px;
 }
 
 .items:hover{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: rgba(255, 255, 255, 0.651);
+    transform: scale(1.05);
+    transition: 0.4s;
 }
+
 
 /* Results Section */
 
+.results{
+    margin: 10px 10px;
+    padding: 30px 30px;
+}
+
 .search-results{
-    margin: 10px 50px;
+    margin: 10px 10px;
     padding: 10px 10px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+
 }
 
 .result-item{
-    width: 100%;
+    width: 300px;
     margin: 10px 10px;
     padding: 20px 20px;
     border-radius: 0.4em;
 }
 
 .result-item:hover{
-    background-color: rgba(0, 0, 0, 0.047);
+    background-color: rgba(255, 253, 237, 0.107);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: scale(1.03);
+    transition: 0.3s;
+}
+
+.result-item>a{
+    text-decoration: none;
 }
 
 .meal-image{
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 100%;
+    max-height: 100%;
     border-radius: 0.4em;
 }
 
@@ -309,3 +330,31 @@ nav li svg{
     }
 }
 
+/* Login and Register*/
+
+.login, .register{
+    height: 100%;
+    margin: 0;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    background-image: url("https://www.themealdb.com/images/media/meals/1529444113.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.login-container, .register-container{
+    filter: blur(0px);
+    background-color: rgba(255, 255, 255, 0.599);
+    margin: auto;
+    margin-top: 17%;
+    padding: 30px 30px;
+    max-width: 50%;
+    max-height: 60%;
+    border-radius: 0.6em;
+    z-index: 100;
+}
+.register-container{
+    margin-top: 12%;
+}

@@ -26,9 +26,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'index' %}"><span class="logo-first">Recipe </span><span class="logo-second">Ez</span></a>
                 </li>
+                {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'index' %}">Category</a>
+                    <a class="nav-link" href="{% url 'favourites' %}">Favourites</a>
                 </li>
+                {% endif %}
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
@@ -50,7 +52,7 @@
                     <form method="GET" action="{% url 'search' %}">
                         {% csrf_token %}
                         <input class="search" type="text" name="q" minlength="0" maxlength="100" required placeholder="Search" value="{{query}}">
-                        <input type="submit">
+                        <!--<input type="submit">-->
                     </form>
                 </li>
             </ul>

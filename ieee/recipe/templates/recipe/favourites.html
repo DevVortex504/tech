@@ -1,20 +1,45 @@
 {% extends 'recipe/layout.html' %}
 {% block body %}
-    <div class="search-results">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        console.log("code running")
+        let s_container = document.getElementsByClassName("search-results");
+        let n = "{{n}}";
+        console.log(n)
+        if (n<4){
+            for (let i=0; i<s_container.length;i++){
+                s_container[i].style.justifyContent = "left";
+                console.log("left aligned")
+            }
+        }
+        else{
+            for (let i=0; i<s_container.length;i++){
+                s_container[i].style.justifyContent = "center";
+                console.log("center aligned")
+            }
+        }
+    });
+</script>
+
+    <section class="results">
         {% if not favourites %}
-        <h2 class="no-results">No Favourites</h2>
-        {% else %}
-        <h1>Favourites:</h1>
-        {% endif %}
-        {% for meal in meals %}
-            <div class="result-item">
-                <a href="{% url 'recipe' meal.idMeal %}">
-                    <div>
-                        <img class="meal-image" src="{{meal.strMealThumb}}">
-                        <label class="meal-name">{{meal.strMeal}}</label>
-                    </div>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
+            <h2 class="no-results">No Favourites</h2>
+            {% else %}
+            <h1>Favourites:</h1>
+            {% endif %}
+        <div class="search-results">
+            {% for meal in meals %}
+                <div class="result-item">
+                    <a href="{% url 'recipe' meal.idMeal %}">
+                        <div>
+                            <img class="meal-image" src="{{meal.strMealThumb}}">
+                            <label class="meal-name">{{meal.strMeal}}</label>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    
 {% endblock %}
