@@ -1,25 +1,30 @@
 {% extends "recipe/layout.html" %}
 {% block body %}
     <div class="recipe-container">
-        <h3>{{meal.strMeal}}</h3>
-        <img src="{{meal.strMealThumb}}">
-            <h5>Category: {{meal.strCategory}}</h5>
-            <br>
-            <h5>Ingredients</h5>
-            <table>
-                {% for ingredient in ingredients %}
-                    <tr>
-                        <th>{{ingredient.0}}</th>
-                        <td>{{ingredient.1}}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-            <h5>Instruction:</h5>
-            <p>{{meal.strInstructions}}</p>
-            {% if favourite %}
-                <button><a href="{% url 'favourite_remove' meal.idMeal %}">Remove from Favourites</a></button>
-            {% else %}
-                <button><a href="{% url 'favourite_add' meal.idMeal %}">Add to Favourites</a></button>
-            {% endif %}
+        <h1 style="padding-bottom: 20px;">{{meal.strMeal}}</h1>
+        <div class="image-text">
+            <img src="{{meal.strMealThumb}}">
+            <div class="side-info">
+                <h4 style="padding-bottom: 10px; padding-top: 20px;">Category: {{meal.strCategory}}</h4>
+                <br>
+                <h4 style="padding-bottom: 15px;">Ingredients:</h4>
+                <table>
+                    {% for ingredient in ingredients %}
+                        <tr>
+                            <th>{{ingredient.0}}</th>
+                            <td>{{ingredient.1}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <h4 style="padding-top: 15px; padding-bottom: 10px;">Instruction:</h4>
+        <p>{{meal.strInstructions}}</p>
+        {% if favourite %}
+            <button><a href="{% url 'favourite_remove' meal.idMeal %}">Remove from Favourites</a></button>
+        {% else %}
+            <button><a href="{% url 'favourite_add' meal.idMeal %}">Add to Favourites</a></button>
+        {% endif %}
+            
     </div>
 {% endblock %}

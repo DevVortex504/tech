@@ -68,6 +68,11 @@ def logout_view(request):
 
 
 def register(request):
+    username = ""
+    email = ""
+    password = ""
+    confirmation = ""
+    
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
