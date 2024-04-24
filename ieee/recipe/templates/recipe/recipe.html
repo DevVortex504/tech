@@ -1,5 +1,21 @@
 {% extends "recipe/layout.html" %}
 {% block body %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            console.log("js working")
+            let instruction = `{{meal.strInstructions}}`;
+            const recipeContainer = document.getElementById('instructionContainer');
+            const paragraphs = instruction.split('\n');
+            
+            paragraphs.forEach(paragraph => {
+                const p = document.createElement('p');
+                p.textContent = paragraph;
+                console.log(paragraph)
+                recipeContainer.appendChild(p);
+            });
+        })
+    </script>
+
     <div class="recipe-container">
         <h1 style="padding-bottom: 20px;">{{meal.strMeal}}</h1>
         <div class="image-text">
@@ -19,7 +35,10 @@
             </div>
         </div>
         <h4 style="padding-top: 15px; padding-bottom: 10px;">Instruction:</h4>
-        <p>{{meal.strInstructions}}</p>
+        <div id="instructionContainer">
+            <!--instruction added here-->
+        </div>
+        <!--<p>{{meal.strInstructions}}</p>-->
         {% if request.user.is_authenticated %}
             {% if favourite %}
                 <button><a href="{% url 'favourite_remove' meal.idMeal %}">Remove from Favourites</a></button>

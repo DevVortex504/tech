@@ -16,10 +16,34 @@
     </section>
 
     <!-- Category Section -->
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            var categoryContainer = document.getElementById("category-container")
+            //set category scroll to first item
+            window.onload = function() {
+                categoryContainer.scrollLeft = -1000;
+            };
+            var lastScroll = 0;
+            //horizontal scrolling of category while vertical scrolling
+            window.onscroll = () => {
+                //at 420 category items are visible
+                if (window.scrollY>420){
+                    console.log(window.scrollY)
+                    //direction of scroll and accordingly, scrolls the category
+                    if (window.scrollY - lastScroll>=0){
+                        categoryContainer.scrollLeft += 1;
+                    }
+                }
+                if (window.scrollY - lastScroll<0){
+                    categoryContainer.scrollLeft -= 1;
+                }
+                lastScroll = window.scrollY
+            }
+        });
+    </script>
     <section class="category">
         <h2>Category</h2>
-        <div class="index-container">
+        <div class="index-container" id="category-container">
             {% for category in categories %}
                 <a href="{% url 'category' category.strCategory %}">
                     <div class="items">
@@ -30,4 +54,7 @@
             {% endfor %}
         </div>
     </section>
+    <div style=" height: 100%;">
+
+    </div>
 {% endblock %}

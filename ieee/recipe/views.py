@@ -116,10 +116,11 @@ def category(request, category=None):
         o = response.json()
         meal = o["meals"]
         try:
-            n = len(meals)
+            n = len(meal)
         except:
             n = 0
         return render(request,"recipe/results.html",{
+            "name": category,
             "meals":meal,
             "n":n,
         })
@@ -177,7 +178,7 @@ def recipe_data(request):
                     print(meal["title"])
             else:
                 return HttpResponse(f"Error: {response.status_code} {response.text}")  
-    print(meals)
+    print(json.dumps(meals, indent=3))
     try:
         n = len(meals)
     except:

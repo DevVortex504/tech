@@ -28,6 +28,7 @@ nav ul{
 
 nav li{
     height: 50px;
+    display: inline-flex;
     padding-top: 3px;
     align-items: center;
     justify-content: center;
@@ -200,6 +201,8 @@ nav li svg{
     padding: 10px 10px;
     text-align: center;
     border-radius: 1em;
+    transform: scale(1);
+    transition: 0.2s;
 }
 .items>img{
     width: 200px;
@@ -227,14 +230,14 @@ nav li svg{
     padding: 10px 10px;
     display: flex;
     flex-wrap: wrap;
-
 }
 
 .result-item{
     width: 300px;
-    margin: 10px 10px;
-    padding: 20px 20px;
+    padding: 20px 15px;
     border-radius: 0.4em;
+    transform: scale(1);
+    transition: 0.2s;
 }
 
 .result-item:hover{
@@ -255,10 +258,29 @@ nav li svg{
 }
 
 .meal-name{
-    padding: 10px 10px;
-    font-size: 1.4em;
+    padding: 10px 10px 0px 10px;
+    margin-bottom: 0px;
+    font-size: 1.2em;
     color: rgb(48, 37, 37);
     font-weight: 500;
+}
+
+.more-info{
+    padding: 0px 5px 0px 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.more-info>p{
+    color: gray;
+}
+
+.veg{
+    width: 15px;
+    height: 15px;
+    border-radius: 40px;
+    background-color: rgb(24, 174, 29);
 }
 
 @media(max-width:600px){

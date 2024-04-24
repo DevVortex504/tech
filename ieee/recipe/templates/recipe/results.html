@@ -21,10 +21,14 @@
     });
 </script>
     <section class="results">
-        {% if not meals %}
-        <h2 class="no-results">No Results Found</h2>
+        {% if not name %}
+            {% if not meals %}
+            <h2 class="no-results">No Results Found</h2>
+            {% else %}
+            <h1>Results:</h1>
+            {% endif %}
         {% else %}
-        <h1>Results:</h1>
+            <h1>{{name}}:</h1>
         {% endif %}
         <div class="search-results">
             {% for meal in meals %}
@@ -33,6 +37,12 @@
                         <div>
                             <img class="meal-image" src="{{meal.strMealThumb}}">
                             <label class="meal-name">{{meal.strMeal}}</label>
+                            <div class="more-info">
+                                <p>{{meal.strArea}}</p>
+                                {% if meal.strCategory == "Vegan" or meal.strCategory == "Vegetarian" or name == "Vegan" or name == "Vegetarian" %}
+                                <div class="veg"></div>
+                                {% endif %}
+                            </div>
                         </div>
                     </a>
                 </div>
