@@ -41,9 +41,9 @@
         <!--<p>{{meal.strInstructions}}</p>-->
         {% if request.user.is_authenticated %}
             {% if favourite %}
-                <button><a href="{% url 'favourite_remove' meal.idMeal %}">Remove from Favourites</a></button>
+                <a href="{% url 'favourite_remove' meal.idMeal %}"><button>Remove from Favourites</button></a>
             {% else %}
-                <button><a href="{% url 'favourite_add' meal.idMeal %}">Add to Favourites</a></button>
+                <a href="{% url 'favourite_add' meal.idMeal %}"><button>Add to Favourites</button></a>
             {% endif %}
         {% endif %}
             

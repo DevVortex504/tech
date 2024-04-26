@@ -33,7 +33,7 @@ def index(request):
     #print(json.dumps(response.json(), indent=3))
     o=response.json()
     category = o["categories"]
-    print(category)
+    #print(category)
     return render(request, "recipe/index.html",{
         "categories" : category,
         "random": random,
