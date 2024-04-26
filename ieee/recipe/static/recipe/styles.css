@@ -88,22 +88,58 @@ nav li svg{
     color: black;
     background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255));
 }
+.sidebar{
+    display: none;
+}
+
+nav svg{
+    display: block;
+    align-self: center;
+    top: 50%;
+}
+.menu-button{
+    display: none;
+}
 
 @media(max-width:800px){
-    nav{
-        background-color: rgb(108, 108, 255);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        z-index: 10;
+    nav li{
+        display: none;
     }
-    nav ul{
+    nav li:first-child{
         display: flex;
+    }
+    .menu-button{
+        display: flex;
+    }
+    .sidebar{
+        position: fixed;
+        top: 0%;
+        display: none;
         flex-direction: column;
-        align-items: flex-start;
+        z-index: 10;
+        overflow: scroll;
+        width: 100%;
+        height: 120vh;
+        justify-self: right;
         justify-content: flex-start;
-        background-color: rgb(108, 108, 255);
+        align-items: flex-start;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background-color: rgba(0, 0, 0, 0.647);
+    }
+    .sidebar form{
+        margin-bottom: 4px;
+    }
+    .sidebar li{
+        display: flex;
+        width: 90%;
+        margin: 10px 10px;
+    }
+}
+
+@media(max-width:400px){
+    .search-icon{
+        display: none;
     }
 }
 
